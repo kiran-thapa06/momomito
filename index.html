@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Momo mitho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <style>
+        /* --- Base Styles --- */
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #2e282a;
+            --accent-color: #17bebb;
+            --light-color: #f9f9f9;
+            --dark-color: #1d1d1d;
+            --font-primary: 'Poppins', sans-serif;
+            --font-secondary: 'Playfair Display', serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--dark-color);
+            line-height: 1.6;
+            background-color: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+        /* --- Header & Navigation --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: background-color 0.3s ease, padding 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 5%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-family: var(--font-secondary);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark-color);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: var(--font-secondary);
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInDown 1.5s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1.5s;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            animation: fadeIn 2s;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #e65a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: white;
+            color: var(--dark-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- About Section --- */
+        .about {
+            padding: 6rem 5%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 5px solid var(--primary-color);
+            border-radius: 10px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+        }
+
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .section-title {
+            font-family: var(--font-secondary);
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* --- Menu Section --- */
+        .menu {
+            padding: 6rem 5%;
+            background-color: #f5f5f5;
+        }
+
+        .menu-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .menu-header .section-title {
+            display: inline-block;
+        }
+
+        .menu-header .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-tab {
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem 1rem;
+            border: none;
+            background-color: white;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-tab.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .menu-tab:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .menu-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.1);
+        }
+
+        .menu-item-content {
+            padding: 1.5rem;
+        }
+
+        .menu-item-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-title h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .menu-item-price {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+
+        .menu-item-desc {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .menu-item-rating {
+            color: #ffd700;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-cta {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .menu-item-cta .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* --- Reservation Section --- */
+        .reservation {
+            padding: 6rem 5%;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+        }
+
+        .reservation .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .reservation-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            margin-top: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-control {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 0.5rem;
+            text-align: left;
+            font-weight: 500;
+        }
+
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-family: var(--font-primary);
+        }
+
+        .form-control input::placeholder,
+        .form-control textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-control textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        /* --- Blog Section --- */
+        .blog {
+            padding: 6rem 5%;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-header .section-title {
+            display: inline-block;
+        }
+
+        .blog-header .section-title::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .blog-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .blog-post {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-post-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .blog-post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-post:hover .blog-post-image img {
+            transform: scale(1.1);
+        }
+
+        .blog-post-content {
+            padding: 1.5rem;
+        }
+
+        .blog-post-date {
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .blog-post-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .blog-post-excerpt {
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .blog-post-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .blog-post-link i {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-post-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* --- Contact Section --- */
+        .contact {
+            padding: 6rem 5%;
+            background-color: #f5f5f5;
+        }
+
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info-item i {
+            margin-right: 1rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            width: 30px;
+        }
+
+        .contact-info-content h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form .form-control {
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form .form-control input,
+        .contact-form .form-control textarea {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            color: var(--dark-color);
+        }
+
+        .contact-form .form-control input::placeholder,
+        .contact-form .form-control textarea::placeholder {
+            color: #999;
+        }
+
+        .contact-form .btn {
+            width: 100%;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .footer-logo-text {
+            font-family: var(--font-secondary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .footer-about p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links ul li a {
+            text-decoration: none;
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-family: var(--font-primary);
+        }
+
+        .newsletter-form button {
+            padding: 0 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #e65a2a;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            color: #ccc;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 3%;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                width: 250px;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+
+            .nav-menu.active {
+                right: 0;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active .line2 {
+                opacity: 0;
+            }
+
+            .hamburger.active .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .menu-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-tab {
+                width: 100%;
+                max-width: 200px;
+                margin-bottom: 0.5rem;
+            }
+
+            .form-row {
+                flex-direction: column;
+            }
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Loader --- */
+        .loader-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary-color);
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-container.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-text">MOMO MITHO</div>
+        </div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#reservation">Reservation</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Delicious Food For Your Cravings</h1>
+        <p>Experience the authentic flavors of our delicious dishes prepared with the finest ingredients by our expert chefs.</p>
+        <div class="hero-buttons">
+            <a href="#menu" class="btn btn-primary">View Menu</a>
+            <a href="#reservation" class="btn btn-secondary">Book a Table</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-image" data-aos="fade-right">
+            <img src="./IMG_7010.JPG" alt="About Savory Bites">
+        </div>
+        <div class="about-content" data-aos="fade-left">
+            <h2 class="section-title"> Nepal to the port city of Hamburg</h2>
+            <p>
+    <h1> MOMOMITO says MOIN!</h1>
+                We bring a piece of Nepal to the Hanseatic city of Hamburg. 
+                Whether for a quick bite or a cozy evening with friends - MOMOMITO welcomes you!<a href="#menu" class="btn btn-primary">Explore Our Menu</a>
+            </p>
+            </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu" id="menu">
+        <div class="menu-header">
+            <h2 class="section-title">Our Menu</h2>
+            <p>Discover our wide range of delicious dishes prepared with love and care.</p>
+        </div>
+        <div class="menu-tabs">
+            <button class="menu-tab active" data-category="all">All</button>
+            <button class="menu-tab" data-category="appetizers">Appetizers</button>
+            <button class="menu-tab" data-category="main">Main Course</button>
+            <button class="menu-tab" data-category="desserts">Desserts</button>
+            <button class="menu-tab" data-category="drinks">Drinks</button>
+        </div>
+        <div class="menu-items">
+            <div class="menu-item" data-aos="fade-up" data-category="appetizers">
+                <div class="menu-item-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Appetizer">
+                </div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">
+                        <h3>Crispy Calamari</h3>
+                        <span class="menu-item-price">$12</span>
+                    </div>
+                    <p class="menu-item-desc">Tender calamari rings, lightly battered and fried to perfection, served with a zesty lemon aioli.</p>
+                    <div class="menu-item-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="menu-item-cta">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="#" class="btn btn-secondary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item" data-aos="fade-up" data-aos-delay="100" data-category="main">
+                <div class="menu-item-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Main Course">
+                </div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">
+                        <h3>Grilled Salmon</h3>
+                        <span class="menu-item-price">$24</span>
+                    </div>
+                    <p class="menu-item-desc">Fresh Atlantic salmon grilled to perfection, served with roasted vegetables and herb-infused rice.</p>
+                    <div class="menu-item-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="menu-item-cta">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="#" class="btn btn-secondary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item" data-aos="fade-up" data-aos-delay="200" data-category="desserts">
+                <div class="menu-item-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Dessert">
+                </div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">
+                        <h3>Chocolate Lava Cake</h3>
+                        <span class="menu-item-price">$9</span>
+                    </div>
+                    <p class="menu-item-desc">Warm chocolate cake with a molten center, served with vanilla ice cream and fresh berries.</p>
+                    <div class="menu-item-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="menu-item-cta">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="#" class="btn btn-secondary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item" data-aos="fade-up" data-aos-delay="300" data-category="drinks">
+                <div class="menu-item-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Drink">
+                </div>
+                <div class="menu-item-content">
+                    <div class="menu-item-title">
+                        <h3>Berry Smoothie</h3>
+                        <span class="menu-item-price">$7</span>
+                    </div>
+                    <p class="menu-item-desc">Refreshing blend of mixed berries, yogurt, and honey, topped with fresh mint.</p>
+                    <div class="menu-item-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="menu-item-cta">
+                        <a href="#" class="btn btn-primary">Order Now</a>
+                        <a href="#" class="btn btn-secondary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation" id="reservation">
+        <h2 class="section-title">Book A Table</h2>
+        <p>Reserve your table in advance to avoid waiting in line.</p>
+        <div class="reservation-form" data-aos="zoom-in">
+            <form id="bookingForm">
+                <div class="form-row">
+                    <div class="form-control">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-control">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="Your Phone" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-control">
+                        <label for="time">Time</label>
+                        <input type="time" id="time" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="guests">Number of Guests</label>
+                        <select id="guests" required>
+                            <option value="" disabled selected>Select Guests</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5">5 People</option>
+                            <option value="6">6+ People</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="form-control">
+                        <label for="message">Special Request</label>
+                        <textarea id="message" placeholder="Any special requests or requirements?"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Book Now</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="blog-header">
+            <h2 class="section-title">Food Blog</h2>
+            <p>Discover our latest recipes, food tips, and culinary adventures.</p>
+        </div>
+        <div class="blog-posts">
+            <div class="blog-post" data-aos="fade-up">
+                <div class="blog-post-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Blog Post 1">
+                </div>
+                <div class="blog-post-content">
+                    <p class="blog-post-date">March 25, 2025</p>
+                    <h3 class="blog-post-title">The Secret to Perfect Pasta</h3>
+                    <p class="blog-post-excerpt">Learn the techniques and tips our chefs use to create the perfect pasta dishes every time, from cooking the pasta al dente to making flavorful sauces.</p>
+                    <a href="#" class="blog-post-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-post" data-aos="fade-up" data-aos-delay="100">
+                <div class="blog-post-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Blog Post 2">
+                </div>
+                <div class="blog-post-content">
+                    <p class="blog-post-date">March 18, 2025</p>
+                    <h3 class="blog-post-title">Seasonal Ingredients for Spring</h3>
+                    <p class="blog-post-excerpt">Discover the fresh spring ingredients that are currently inspiring our chefs and learn how to incorporate them into your home cooking.</p>
+                    <a href="#" class="blog-post-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="blog-post" data-aos="fade-up" data-aos-delay="200">
+                <div class="blog-post-image">
+                    <img src="https://via.placeholder.com/400x300" alt="Blog Post 3">
+                </div>
+                <div class="blog-post-content">
+                    <p class="blog-post-date">March 10, 2025</p>
+                    <h3 class="blog-post-title">Meet Our Head Chef</h3>
+                    <p class="blog-post-excerpt">Get to know the creative mind behind our delicious menu. Learn about Chef Maria's culinary journey, inspirations, and favorite dishes.</p>
+                    <a href="#" class="blog-post-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info" data-aos="fade-right">
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="contact-info-content">
+                        <h4>Location</h4>
+                        <p>123 Culinary Street, Foodie City, FC 12345</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="contact-info-content">
+                        <h4>Phone</h4>
+                        <p>(123) 456-7890</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="contact-info-content">
+                        <h4>Email</h4>
+                        <p>info@savorybites.com</p>
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="contact-info-content">
+                        <h4>Opening Hours</h4>
+                        <p>Monday - Friday: 11:00 AM - 10:00 PM</p>
+                        <p>Saturday - Sunday: 10:00 AM - 11:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form" data-aos="fade-left">
+                <form id="contactForm">
+                    <div class="form-control">
+                        <label for="contactName">Your Name</label>
+                        <input type="text" id="contactName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="contactEmail">Your Email</label>
+                        <input type="email" id="contactEmail" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="contactSubject">Subject</label>
+                        <input type="text" id="contactSubject" placeholder="Enter subject" required>
+                    </div>
+                    <div class="form-control">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column footer-about">
+                <div class="footer-logo">
+                    <div class="footer-logo-text">Savory Bites</div>
+                </div>
+                <p>Delicious food for your cravings. We serve the most delicious dishes made with the freshest ingredients by our expert chefs.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                </div>
+            </div>
+            <div class="footer-column footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#reservation">Reservation</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-links">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Delivery Information</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+            <div class="footer-column footer-newsletter">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter to get the latest updates on our special offers and promotions.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Savory Bites. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false
+            });
+
+            // Loader
+            setTimeout(function() {
+                document.querySelector('.loader-container').classList.add('hidden');
+            }, 1500);
+
+            // Navbar Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+
+            // Close navbar when link is clicked
+            document.querySelectorAll('.nav-menu a').forEach(item => {
+                item.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+
+            // Scroll Header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Menu Tabs
+            const menuTabs = document.querySelectorAll('.menu-tab');
+            const menuItems = document.querySelectorAll('.menu-item');
+
+            menuTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    menuTabs.forEach(tab => tab.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Get category
+                    const category = tab.getAttribute('data-category');
+
+                    // Show/hide menu items based on category
+                    menuItems.forEach(item => {
+                        const itemCategory = item.getAttribute('data-category');
+                        if (category === 'all' || category === itemCategory) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Form Submissions
+            document.getElementById('bookingForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Booking submitted successfully! We will contact you shortly to confirm your reservation.');
+                this.reset();
+            });
+
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Message sent successfully! We will get back to you as soon as possible.');
+                this.reset();
+            });
+
+            // Smooth Scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Image animations on hover for menu items
+            const menuItemImages = document.querySelectorAll('.menu-item-image');
+            
+            menuItemImages.forEach(image => {
+                image.addEventListener('mouseenter', () => {
+                    image.querySelector('img').style.transform = 'scale(1.1)';
+                });
+                
+                image.addEventListener('mouseleave', () => {
+                    image.querySelector('img').style.transform = 'scale(1)';
+                });
+            });
+
+            // Animated counter for stats
+            function animateCounter(el, start, end, duration) {
+                let startTime = null;
+                
+                function animation(currentTime) {
+                    if (!startTime) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const progress = Math.min(timeElapsed / duration, 1);
+                    const value = Math.floor(progress * (end - start) + start);
+                    
+                    el.textContent = value;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animation);
+                    }
+                }
+                
+                requestAnimationFrame(animation);
+            }
+
+            // Add to cart animation
+            const addToCartButtons = document.querySelectorAll('.menu-item-cta .btn-secondary');
+            
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Item added to cart!');
+                });
+            });
+
+            // Order now buttons
+            const orderNowButtons = document.querySelectorAll('.menu-item-cta .btn-primary');
+            
+            orderNowButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    alert('Order placed successfully!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
